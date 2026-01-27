@@ -21,12 +21,18 @@ app.use("/api/release", releaseRouter);
 app.use("/api/payment", paymentRouter);
 
 app.get("/", (req, res) => {
-  res.send("Runing...");
+  res.send("Running...");
 });
 
 const PORT = process.env.PORT || 7070;
-mongoose.connect(process.env.DB_URL).then(() => {
-  app.listen(PORT, () => {
-    console.log(`Server is running on ${PORT}`);
+
+// Only connect to MongoDB and listen if not in serverless environment
+if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
+  mongoose.connect(process.env.DB_URL).then(() => {
+    app.listen(PORT, () => {
+      console.log(`Server is running on ${PORT}`);
+    });
   });
-});
+}
+
+export default app;
