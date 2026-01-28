@@ -7,7 +7,7 @@ import jobRouter from "./Routes/Job.routes.js";
 import proposalRouter from "./Routes/Proposal.routes.js";
 import escrowRouter from "./Routes/Escrow.routes.js";
 import releaseRouter from "./Routes/Release.routes.js";
-import paymentRouter from "./Routes/Payment.routes.js"
+import paymentRouter from "./Routes/Payment.routes.js";
 
 dotenv.config();
 const app = express();
@@ -26,12 +26,13 @@ app.get("/", (req, res) => {
 
 const PORT = process.env.PORT || 7070;
 
-// Only connect to MongoDB and listen if not in serverless environment
-if (process.env.NODE_ENV !== "production" || !process.env.VERCEL) {
-  mongoose.connect(process.env.DB_URL).then(() => {
-    app.listen(PORT, () => {
-      console.log(`Server is running on ${PORT}`);
-    });
+// Connect to MongoDB
+mongoose.connect(process.env.DB_URL);
+
+// Only listen on PORT if not in serverless environment
+if (!process.env.VERCEL) {
+  app.listen(PORT, () => {
+    console.log(`Server is running on ${PORT}`);
   });
 }
 
