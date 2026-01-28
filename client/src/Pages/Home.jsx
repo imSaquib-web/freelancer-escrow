@@ -22,6 +22,7 @@ const Home = () => {
         {!user ? (
           <div className="flex justify-center gap-4">
             {/*If user is not login show this buttons*/}
+            {/* IF NOT show register login button */}
             <button
               onClick={() => navigate("/register")}
               className="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700"
