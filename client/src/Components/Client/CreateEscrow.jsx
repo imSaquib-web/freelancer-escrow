@@ -17,6 +17,7 @@ const CreateEscrow = () => {
   }, [jobId]);
 
   const fetchEscrow = async () => {
+    // it is used to fetch the escrow
     try {
       const response = await Api.get(`/escrow/job/${jobId}`);
       setEscrow(response.data);
