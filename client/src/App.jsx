@@ -1,10 +1,10 @@
 // src/App.jsx
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import Navigation from "./components/Navigation";
+import Navigation from "./Components/Navigation";
 import ProtectedRoute from "./Components/ProtectedRoute";
 import Login from "./Components/Auth/Login";
-import Register from "./components/Auth/Register";
+import Register from "./Components/Auth/Register";
 import Home from "./Pages/Home";
 
 // Client
