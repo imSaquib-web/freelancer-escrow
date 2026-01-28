@@ -6,7 +6,6 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client",
     "lint": "eslint .",
     "preview": "vite preview"
   },
