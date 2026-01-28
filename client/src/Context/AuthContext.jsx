@@ -18,6 +18,7 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   const fetchUser = async () => {
+    // it is used to get logged in user data
     try {
       const res = await Api.get("/users/me");
       setUser(res.data);
