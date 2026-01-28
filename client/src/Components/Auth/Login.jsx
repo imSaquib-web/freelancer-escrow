@@ -14,13 +14,15 @@ const Login = () => {
     setLoading(true);
     const success = await login(email, password);
     setLoading(false);
-    if (role === "client") {
-    navigate("/client/dashboard");
-  } else if (role === "freelancer") {
-    navigate("/freelancer/dashboard");
-  } else if (role === "admin") {
-    navigate("/admin/dashboard");
-  }
+    if (success && user) {
+      if (user.role === "client") {
+        navigate("/client/dashboard");
+      } else if (user.role === "freelancer") {
+        navigate("/freelancer/dashboard");
+      } else if (user.role === "admin") {
+        navigate("/admin/dashboard");
+      }
+    }
   };
 
   return (
