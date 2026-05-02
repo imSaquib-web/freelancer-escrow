@@ -1,7 +1,6 @@
 import ProposalDB from "../Model/Proposal.js";
 import JobDB from "../Model/Job.js";
 import EscrowDB from "../Model/Escrow.js";
-import Proposal from "../Model/Proposal.js";
 
 //proposal FREELANCER create krta h
 const createProposal = async (req, res) => {
@@ -101,8 +100,8 @@ const updateProposal = async (req, res) => {
     // 5. Reject other proposals
     await ProposalDB.updateMany(
       {
-        jobId: proposal.jobId,
-        _id: { $ne: proposal._id },
+        jobId: proposal.jobId, //tracks all proposal in same job
+        _id: { $ne: proposal._id },// exclude all proposals other than this 
       },
       { status: "rejected" },
     );

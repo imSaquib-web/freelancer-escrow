@@ -14,12 +14,16 @@ import ViewProposals from "./Components/Client/ViewProposal";
 import CreateEscrow from "./Components/Client/CreateEscrow";
 import ReleasePayment from "./Components/Client/ReleasePayment";
 import DisputesPage from "./Components/Client/Dispute";
+import AllOpenJobs from "./Components/Client/AllOpenJobs";
+import MyJobs from "./Components/Client/MyJobs";
+import MyDisputes from "./Components/Client/MyDisputes";
 
 // Freelancer
 import FreelancerDashboard from "./Components/Freelancer/FreelancerDashboard";
 import BrowseJobs from "./Components/Freelancer/BrowseJob";
 import SubmitProposal from "./Components/Freelancer/SubmitProposal";
 import MyProposals from "./Components/Freelancer/MyProposals";
+import FreelancerDispute from "./Components/Freelancer/FreelancerDispute";
 
 // Admin
 import AdminDashboard from "./Components/Admin/AdminDashboard";
@@ -76,6 +80,30 @@ const App = () => {
             <ProtectedRoute element={<DisputesPage />} requiredRole="client" />
           }
         />
+        <Route
+          path="/client/dispute"
+          element={
+            <ProtectedRoute element={<DisputesPage />} requiredRole="client" />
+          }
+        />
+        <Route
+          path="/client/all-jobs"
+          element={
+            <ProtectedRoute element={<AllOpenJobs />} requiredRole="client" />
+          }
+        />
+        <Route
+          path="/client/my-jobs"
+          element={
+            <ProtectedRoute element={<MyJobs />} requiredRole="client" />
+          }
+        />
+        <Route
+          path="/client/my-disputes"
+          element={
+            <ProtectedRoute element={<MyDisputes />} requiredRole="client" />
+          }
+        />
 
         {/* Freelancer Routes - Protected */}
         <Route
@@ -110,6 +138,15 @@ const App = () => {
           element={
             <ProtectedRoute
               element={<MyProposals />}
+              requiredRole="freelancer"
+            />
+          }
+        />
+        <Route
+          path="/freelancer/disputes"
+          element={
+            <ProtectedRoute
+              element={<FreelancerDispute />}
               requiredRole="freelancer"
             />
           }

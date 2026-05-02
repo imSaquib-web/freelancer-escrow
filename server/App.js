@@ -8,6 +8,8 @@ import proposalRouter from "./Routes/Proposal.routes.js";
 import escrowRouter from "./Routes/Escrow.routes.js";
 import releaseRouter from "./Routes/Release.routes.js";
 import paymentRouter from "./Routes/Payment.routes.js";
+import disputeRouter from "./Routes/Dispute.routes.js";
+import ratingRouter from "./Routes/Rating.routes.js";
 
 dotenv.config();
 const app = express();
@@ -19,6 +21,8 @@ app.use("/api/proposals", proposalRouter);
 app.use("/api/escrow", escrowRouter);
 app.use("/api/release", releaseRouter);
 app.use("/api/payment", paymentRouter);
+app.use("/api/disputes", disputeRouter);
+app.use("/api/ratings", ratingRouter);
 
 app.get("/", (req, res) => {
   res.send("Running...");

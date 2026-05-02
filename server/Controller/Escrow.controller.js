@@ -2,6 +2,25 @@ import Job from "../Model/Job.js";
 import Proposal from "../Model/Proposal.js";
 import Escrow from "../Model/Escrow.js";
 
+// Get all escrows for current user (as client or freelancer)
+const getMyEscrows = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const escrows = await Escrow.find({
+      $or: [{ clientId: userId }, { freelancerId: userId }],
+    })
+      .populate("jobId", "title")
+      .populate("clientId", "name email")
+      .populate("freelancerId", "name email")
+      .sort({ createdAt: -1 });
+
+    res.json(escrows);
+  } catch (err) {
+    res.status(500).json({ msg: "Error fetching escrows", error: err.message });
+  }
+};
+
 export const getEscrowByJob = async (req, res) => {
   try {
     const escrow = await Escrow.findOne({ jobId: req.params.jobId });
@@ -57,4 +76,4 @@ const createEscrow = async (req, res) => {
   res.json(escrow);
 };
 
-export default { createEscrow, getEscrowByJob };
+export default { createEscrow, getEscrowByJob, getMyEscrows };

@@ -12,6 +12,7 @@ const FreelancerDashboard = () => {
     completedJobs: 0,
     earnings: 0,
   });
+  const [openDisputes, setOpenDisputes] = useState(0);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
 
@@ -35,6 +36,13 @@ const FreelancerDashboard = () => {
         (p) => p.status === "completed",
       ).length;
 
+      // Fetch disputes
+      const disputesRes = await Api.get("/disputes/my-disputes");
+      const myDisputes = disputesRes.data;
+      const openDisputesCount = myDisputes.filter(
+        (d) => d.status === "open" && d.freelancerId._id === user?._id,
+      ).length;
+
       setStats({
         //here all the stats has been set to the setStats
         totalProposals: totalProposalCount,
@@ -42,6 +50,7 @@ const FreelancerDashboard = () => {
         completedJobs: completedCount,
         earnings: userResponse.data.walletBalance || 0,
       });
+      setOpenDisputes(openDisputesCount);
     } catch (err) {
       console.error("Failed to fetch stats:", err);
     } finally {
@@ -61,6 +70,30 @@ const FreelancerDashboard = () => {
           Manage your freelance projects and earnings
         </p>
       </div>
+
+      {/* DISPUTE ALERT */}
+      {openDisputes > 0 && (
+        <div className="mb-8 p-4 bg-red-50 border-2 border-red-400 rounded-lg">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="font-bold text-red-800 text-lg">
+                ⚠️ You have {openDisputes} open dispute
+                {openDisputes > 1 ? "s" : ""}
+              </p>
+              <p className="text-red-700 text-sm mt-1">
+                A client has raised a dispute against you. Please review the
+                details and provide your response as soon as possible.
+              </p>
+            </div>
+            <button
+              onClick={() => navigate("/freelancer/disputes")}
+              className="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 font-semibold whitespace-nowrap ml-4"
+            >
+              View Now
+            </button>
+          </div>
+        </div>
+      )}
 
       {/* Statistics Cards */}
       <div className="grid grid-cols-1 md:grid-cols-4 gap-4 mb-8">
@@ -106,7 +139,7 @@ const FreelancerDashboard = () => {
             Find new freelance projects to bid on
           </p>
           <button
-          //this btn take to the all jobs
+            //this btn take to the all jobs
             onClick={() => navigate("/freelancer/browse-jobs")}
             className="w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 font-semibold"
           >
@@ -121,7 +154,7 @@ const FreelancerDashboard = () => {
             Track your submitted bids and their status
           </p>
           <button
-          // this btn takes to my proposal
+            // this btn takes to my proposal
             onClick={() => navigate("/freelancer/my-proposals")}
             className="w-full bg-green-600 text-white py-2 rounded hover:bg-green-700 font-semibold"
           >
@@ -130,17 +163,16 @@ const FreelancerDashboard = () => {
         </div>
 
         <div className="border rounded-lg p-6 bg-white shadow-md hover:shadow-lg transition">
-          <div className="text-3xl mb-4">👤</div>
-          <h3 className="text-xl font-bold mb-2">Profile</h3>
+          <div className="text-3xl mb-4">⚖️</div>
+          <h3 className="text-xl font-bold mb-2">Disputes</h3>
           <p className="text-gray-600 text-sm mb-4">
-            Update your profile and skills
+            View disputes and provide your response
           </p>
           <button
-          //this heads to the profil edit which is not ready yet
-            onClick={() => navigate("/freelancer/profile")}
-            className="w-full bg-purple-600 text-white py-2 rounded hover:bg-purple-700 font-semibold"
+            onClick={() => navigate("/freelancer/disputes")}
+            className="w-full bg-orange-600 text-white py-2 rounded hover:bg-orange-700 font-semibold"
           >
-            Edit Profile
+            View Disputes
           </button>
         </div>
       </div>

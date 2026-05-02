@@ -23,10 +23,16 @@ const Navigation = () => {
           <div className="flex items-center space-x-6">
             {!user ? (
               <>
-                <Link to="/login" className="hover:bg-blue-700 px-3 py-2 rounded">
+                <Link
+                  to="/login"
+                  className="hover:bg-blue-700 px-3 py-2 rounded"
+                >
                   Login
                 </Link>
-                <Link to="/register" className="hover:bg-blue-700 px-3 py-2 rounded">
+                <Link
+                  to="/register"
+                  className="hover:bg-blue-700 px-3 py-2 rounded"
+                >
                   Register
                 </Link>
               </>
@@ -39,34 +45,73 @@ const Navigation = () => {
 
                 {user.role === "client" && (
                   <div className="flex gap-4">
-                    <Link to="/client/dashboard" className="hover:bg-blue-700 px-3 py-2 rounded text-sm">
+                    <Link
+                      to="/client/dashboard"
+                      className="hover:bg-blue-700 px-3 py-2 rounded text-sm"
+                    >
                       Dashboard
                     </Link>
-                    <Link to="/client/post-job" className="hover:bg-blue-700 px-3 py-2 rounded text-sm">
+                    <Link
+                      to="/client/post-job"
+                      className="hover:bg-blue-700 px-3 py-2 rounded text-sm"
+                    >
                       Post Job
                     </Link>
-                    {/* <Link to="/client/disputes" className="hover:bg-blue-700 px-3 py-2 rounded text-sm">
+                    <Link
+                      to="/client/all-jobs"
+                      className="hover:bg-blue-700 px-3 py-2 rounded text-sm"
+                    >
+                      All Open Jobs
+                    </Link>
+                    <Link
+                      to="/client/my-jobs"
+                      className="hover:bg-blue-700 px-3 py-2 rounded text-sm"
+                    >
+                      My Jobs
+                    </Link>
+                    <Link
+                      to="/client/my-disputes"
+                      className="hover:bg-blue-700 px-3 py-2 rounded text-sm"
+                    >
                       Disputes
-                    </Link> */}
+                    </Link>
                   </div>
                 )}
 
                 {user.role === "freelancer" && (
                   <div className="flex gap-4">
-                    <Link to="/freelancer/dashboard" className="hover:bg-blue-700 px-3 py-2 rounded text-sm">
+                    <Link
+                      to="/freelancer/dashboard"
+                      className="hover:bg-blue-700 px-3 py-2 rounded text-sm"
+                    >
                       Dashboard
                     </Link>
-                    <Link to="/freelancer/browse-jobs" className="hover:bg-blue-700 px-3 py-2 rounded text-sm">
+                    <Link
+                      to="/freelancer/browse-jobs"
+                      className="hover:bg-blue-700 px-3 py-2 rounded text-sm"
+                    >
                       Browse Jobs
                     </Link>
-                    <Link to="/freelancer/my-proposals" className="hover:bg-blue-700 px-3 py-2 rounded text-sm">
+                    <Link
+                      to="/freelancer/my-proposals"
+                      className="hover:bg-blue-700 px-3 py-2 rounded text-sm"
+                    >
                       My Proposals
+                    </Link>
+                    <Link
+                      to="/freelancer/disputes"
+                      className="hover:bg-blue-700 px-3 py-2 rounded text-sm"
+                    >
+                      Disputes
                     </Link>
                   </div>
                 )}
 
                 {user.role === "admin" && (
-                  <Link to="/admin/dashboard" className="hover:bg-blue-700 px-3 py-2 rounded text-sm">
+                  <Link
+                    to="/admin/dashboard"
+                    className="hover:bg-blue-700 px-3 py-2 rounded text-sm"
+                  >
                     Admin Panel
                   </Link>
                 )}
